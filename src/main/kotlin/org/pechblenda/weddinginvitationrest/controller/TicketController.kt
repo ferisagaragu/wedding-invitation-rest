@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 
 import java.util.UUID
+import net.sf.jasperreports.engine.fonts.SimpleFontExtensionsRegistryFactory
+import net.sf.jasperreports.engine.fonts.SimpleFontFamily
 
 @CrossOrigin(methods = [
 	RequestMethod.GET
@@ -25,6 +27,8 @@ class TicketController(
 
 	@GetMapping
 	fun findAllCompaniesByUserUuid(): ResponseEntity<Any> {
+
+
 		val parameters = mutableMapOf<String, Any>()
 		val fields = mutableListOf<MutableMap<String, Any>>()
 
