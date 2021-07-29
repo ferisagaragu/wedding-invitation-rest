@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 
 import java.util.UUID
-import net.sf.jasperreports.engine.fonts.SimpleFontExtensionsRegistryFactory
-import net.sf.jasperreports.engine.fonts.SimpleFontFamily
 
 @CrossOrigin(methods = [
 	RequestMethod.GET

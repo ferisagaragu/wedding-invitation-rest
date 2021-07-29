@@ -19,6 +19,7 @@ class Invitation(
 	var uuid: UUID,
 	var createdDate: Date,
 	var familyName: String,
+	var guestOf: String,
 
 	@OneToMany(mappedBy = "invitation")
 	var guests: List<Guest>
