@@ -15,14 +15,14 @@
 	<detail>
 		<band height="197" splitType="Stretch">
 			<image>
-				<reportElement x="111" y="0" width="360" height="195" uuid="0c69c389-4b98-4a87-9c0a-8554725fd2c4">
+				<reportElement x="20" y="1" width="360" height="195" uuid="0c69c389-4b98-4a87-9c0a-8554725fd2c4">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" rightPadding="0"/>
 				<imageExpression><![CDATA["background.png"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="164" y="80" width="260" height="15" uuid="5dfc52e2-c1d0-46c0-a69e-e764059bbeaa">
+				<reportElement x="73" y="81" width="260" height="15" uuid="5dfc52e2-c1d0-46c0-a69e-e764059bbeaa">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -30,6 +30,28 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
+			<componentElement>
+				<reportElement x="390" y="24" width="148" height="148" uuid="1cfbaf63-4764-4bb3-8d60-a4c07b247ab4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA["http://localhost:4200/#/invitation/cdb23eca-ad90-44c1-a0e1-e9464a1fdd88"]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="70">
+			<staticText>
+				<reportElement x="2" y="-1" width="552" height="71" uuid="2cbcdd22-e1ce-427d-88bb-a0d0601727ca">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Te recordamos que debido al COVID-19 hay que tomar medidas de prevención, este boleto es único e intransferible. Si tienes problemas o sientes sospechas de estar enfermo te entendemos, por favor háznoslo saber por Whatsapp o llamada al 33 2824 0464 ó 33 2381 2452. Recuerda lo único que queremos transmitir es alegría.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
 </jasperReport>

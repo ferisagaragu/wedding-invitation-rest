@@ -2,6 +2,7 @@ package org.pechblenda.weddinginvitationrest.entity
 
 import org.pechblenda.service.annotation.Key
 import org.pechblenda.service.enum.DefaultValue
+import org.pechblenda.weddinginvitationrest.enum.GuestStatus
 
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -14,7 +15,6 @@ import javax.persistence.ManyToOne
 
 import java.util.Date
 import java.util.UUID
-import org.pechblenda.weddinginvitationrest.enum.GuestStatus
 
 @Entity
 @Table(name = "guest")
@@ -26,13 +26,13 @@ class Guest(
 	var name: String,
 	var surname: String,
 	var motherSurname: String,
-	var confirmDate: Date,
+	var confirmDate: Date?,
 
 	@Column(columnDefinition = "int default 0")
 	var status: GuestStatus,
 
 	@ManyToOne
-	var invitation: Invitation
+	var invitation: Invitation?
 ) {
 
 	@PrePersist
@@ -42,7 +42,7 @@ class Guest(
 
 	@Key(name = "familyName", autoCall = true, defaultNullValue = DefaultValue.NULL)
 	fun familyName(): String {
-		return invitation.familyName
+		return invitation?.familyName ?: ""
 	}
 
 	@Key(name = "status", autoCall = true, defaultNullValue = DefaultValue.NUMBER)

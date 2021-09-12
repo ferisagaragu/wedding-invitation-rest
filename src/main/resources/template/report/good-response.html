@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap" rel="stylesheet">
+
+  <title>Validar Ticket</title>
+</head>
+  <body style="background: #4CAF50">
+    <style>
+      .icon {
+        color: white;
+      }
+
+      .text {
+        font-family: 'Josefin Slab', serif !important;
+        font-weight: bold;
+        font-size: 22px !important;
+        color: white;
+      }
+
+      .row {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+      }
+    </style>
+
+    <div class="row">
+      <div id="icon" class="col-md-12 text-center">
+        <i class="fas fa-thumbs-up fa-7x mt-4 icon"></i>
+      </div>
+
+      <div id="text" class="col-md-12 mt-3 text-center text">
+        Boleto Valido
+      </div>
+    </div>
+
+    <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+
+      if (urlParams.get('status') == 'bad') {
+        document.body.style.background = '#F44336';
+        document.getElementById('icon').innerHTML = '<i class="fas fa-thumbs-down fa-7x mt-4 icon"></i>';
+        document.getElementById('text').innerText = 'Este Boleto Ya Fue Utilizado';
+      }
+
+      if (urlParams.get('status') == 'noAuth') {
+        document.body.style.background = '#FDD835';
+        document.getElementById('icon').innerHTML = '<i class="fas fa-unlink fa-7x mt-4 icon"></i>';
+        document.getElementById('text').innerText = 'Boleto Invalido';
+      }
+    </script>
+  </body>
+</html>
