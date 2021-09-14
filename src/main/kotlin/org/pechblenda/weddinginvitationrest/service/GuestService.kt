@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 import java.util.Date
 import javax.servlet.http.HttpServletResponse
-import org.springframework.core.io.ClassPathResource
 
 @Service
 class GuestService(
@@ -42,19 +41,18 @@ class GuestService(
 	}
 
 	@Transactional
-	override fun validateTicket(response: HttpServletResponse, guestUuid: UUID): String {
-		val guest = guestRepository.findById(guestUuid).orElse(null) ?:
-			return this.response.html(
-				response,
-				ClassPathResource("template/report/no-auth-response.html").inputStream
-			)
+	override fun validateTicket(guestTime: Long): ResponseEntity<Any> {
+		val guestFind = guestRepository.findAll().find { guest ->
+			guest.createdDate.time == guestTime
+		} ?: return response.ok(2)
 
-		if (guest.status == GuestStatus.ACCEPT) {
-			guest.status = GuestStatus.USED
-			return this.response.html(response, ClassPathResource("template/report/good-response.html").inputStream)
+		println(guestFind.status)
+		if (guestFind.status == GuestStatus.ACCEPT) {
+			guestFind.status = GuestStatus.USED
+			return this.response.ok(0)
 		}
 
-		return this.response.html(response, ClassPathResource("template/report/bad-response.html").inputStream)
+		return this.response.ok(1)
 	}
 
 	@Transactional

@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service
 import org.springframework.core.io.ClassPathResource
 import org.springframework.transaction.annotation.Transactional
 
-import javax.servlet.http.HttpServletResponse
-
 import java.util.UUID
 
 @Service
@@ -64,7 +62,7 @@ class InvitationService(
 			if (guest.status == GuestStatus.ACCEPT) {
 				val guestData = mutableMapOf<String, Any>()
 				guestData["name"] = "${guest.name} ${guest.surname} ${guest.motherSurname}"
-				guestData["authUrl"] = "hola amigos"
+				guestData["authUrl"] = guest.createdDate.time.toString()
 				fields.add(guestData)
 			}
 		}

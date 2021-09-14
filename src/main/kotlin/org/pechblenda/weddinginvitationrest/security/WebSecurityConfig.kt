@@ -66,8 +66,6 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-		http.headers().frameOptions().disable()
-
 		http.addFilterBefore(
 			authenticationJwtTokenFilter(),
 			UsernamePasswordAuthenticationFilter::class.java

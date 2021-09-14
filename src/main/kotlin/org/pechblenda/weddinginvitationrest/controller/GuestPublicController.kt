@@ -9,14 +9,11 @@ import org.springframework.web.server.ResponseStatusException
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.GetMapping
 
 import org.pechblenda.service.Request
 import org.pechblenda.exception.HttpExceptionResponse
 import org.pechblenda.weddinginvitationrest.service.`interface`.IGuestService
-
-import javax.servlet.http.HttpServletResponse
-
-import java.util.UUID
 
 @CrossOrigin(methods = [
 	RequestMethod.GET,
@@ -29,15 +26,14 @@ class GuestPublicController(
 	private val httpExceptionResponse: HttpExceptionResponse
 ) {
 
-	@RequestMapping("/validate-ticket/{guestUuid}")
+	@GetMapping("/validate-ticket/{guestTime}")
 	fun validateTicket(
-		@PathVariable guestUuid: UUID,
-		response: HttpServletResponse
-	): String {
+		@PathVariable guestTime: Long
+	): ResponseEntity<Any> {
 		return try {
-			guestService.validateTicket(response, guestUuid)
+			guestService.validateTicket(guestTime)
 		} catch (e: ResponseStatusException) {
-			httpExceptionResponse.error(e).statusCode.name
+			httpExceptionResponse.error(e)
 		}
 	}
 
