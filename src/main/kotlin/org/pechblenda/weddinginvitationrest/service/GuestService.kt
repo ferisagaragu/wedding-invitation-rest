@@ -26,6 +26,18 @@ class GuestService(
 ): IGuestService {
 
 	@Transactional(readOnly = true)
+	override fun getNotResponse(httpServletResponse: HttpServletResponse): String {
+		var out = "<ul>"
+		var data = this.guestRepository.findAllByStatusNotConfirm()
+
+		data.forEach { guest -> out += "<li>${guest.name}</li>" }
+
+		out += "</ul>"
+
+		return response.html(httpServletResponse, out)
+	}
+
+	@Transactional(readOnly = true)
 	override fun findAllLikeGuestOfAndFamilyName(
 		guestOf: String?,
 		familyName: String?,
@@ -46,7 +58,6 @@ class GuestService(
 			guest.createdDate.time == guestTime
 		} ?: return response.ok(2)
 
-		println(guestFind.status)
 		if (guestFind.status == GuestStatus.ACCEPT) {
 			guestFind.status = GuestStatus.USED
 			return this.response.ok(0)

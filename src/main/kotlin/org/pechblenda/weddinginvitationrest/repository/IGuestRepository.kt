@@ -23,4 +23,9 @@ interface IGuestRepository: JpaRepository<Guest, UUID> {
 		guestStatus: String
 	): List<Guest>
 
+	@Query(
+		"select guest from Guest guest where guest.status = 1"
+	)
+	fun findAllByStatusNotConfirm(): List<Guest>
+
 }
