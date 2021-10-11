@@ -27,10 +27,12 @@ class GuestService(
 
 	@Transactional(readOnly = true)
 	override fun getNotResponse(httpServletResponse: HttpServletResponse): String {
-		var out = "<ul>"
 		var data = this.guestRepository.findAllByStatusNotConfirm()
+		var guest = this.guestRepository.findAll()
+		var out = "<h3>Faltan ${data.size} invitado(s) por confirmar</h3>" +
+				"<h3>Invidos confirmados ${guest.size - data.size}</h3><ul>"
 
-		data.forEach { guest -> out += "<li>${guest.name}</li>" }
+		data.forEach { guest -> out += "<li>${guest.name}</li> <hr> " }
 
 		out += "</ul>"
 
