@@ -29,8 +29,11 @@ class GuestService(
 	override fun getNotResponse(httpServletResponse: HttpServletResponse): String {
 		var data = this.guestRepository.findAllByStatusNotConfirm()
 		var guest = this.guestRepository.findAll()
-		var out = "<h3>Faltan ${data.size} invitado(s) por confirmar</h3>" +
-				"<h3>Invidos confirmados ${guest.size - data.size}</h3><ul>"
+		var out = "<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/" +
+				"bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9Jv" +
+				"oRxT2MZw1T\" crossorigin=\"anonymous\">" +
+				"<div class=\"p-4\"><h5 class=\"text-danger\">Faltan ${data.size} invitado(s) por confirmar</h5>" +
+				"<h5 class=\"text-info\">Invidos confirmados ${guest.size - data.size}</h5></div><ul>"
 
 		data.forEach { guest -> out += "<li>${guest.name}</li> <hr> " }
 
