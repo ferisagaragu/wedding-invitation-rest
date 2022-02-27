@@ -66,7 +66,6 @@ class InvitationService(
 				fields.add(guestData)
 			}
 		}
-
 		parameters["background"] = ClassPathResource("template/report/background.png").inputStream
 
 		return response.file(
@@ -80,6 +79,39 @@ class InvitationService(
 				fields.toMutableList()
 			)
 		)
+
 	}
+
+	override fun generateTicketFromNames(
+		guests: ArrayList<String>
+	): ResponseEntity<Any> {
+		val parameters = mutableMapOf<String, Any>()
+		val fields = mutableListOf<MutableMap<String, Any>>()
+
+		println(guests)
+
+		guests?.forEach { guest ->
+			val guestData = mutableMapOf<String, Any>()
+			guestData["name"] = guest
+			fields.add(guestData)
+		}
+
+		parameters["background"] = ClassPathResource(
+			"template/report/background-isnela-berrocal.png"
+		).inputStream
+
+		return response.file(
+			"application/pdf",
+			"boletos.pdf",
+			report.exportPdf(
+				ClassPathResource(
+					"template/report/ticket-isnela-berrocal.jrxml"
+				).inputStream,
+				parameters,
+				fields.toMutableList()
+			)
+		)
+	}
+
 
 }

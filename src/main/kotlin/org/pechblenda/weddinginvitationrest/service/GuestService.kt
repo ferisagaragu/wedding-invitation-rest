@@ -18,10 +18,12 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 import java.util.Date
 import javax.servlet.http.HttpServletResponse
+import org.pechblenda.weddinginvitationrest.repository.IInvitationRepository
 
 @Service
 class GuestService(
 	private val guestRepository: IGuestRepository,
+	private val invitationRepository: IInvitationRepository,
 	private val response: Response
 ): IGuestService {
 
@@ -33,11 +35,35 @@ class GuestService(
 				"bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9Jv" +
 				"oRxT2MZw1T\" crossorigin=\"anonymous\">" +
 				"<div class=\"p-4\"><h5 class=\"text-danger\">Faltan ${data.size} invitado(s) por confirmar</h5>" +
-				"<h5 class=\"text-info\">Invidos confirmados ${guest.size - data.size}</h5></div><ul>"
+				"<h5 class=\"text-info\">Invidos confirmados ${guest.size - data.size}</h5></div><ol>"
 
 		data.forEach { guest -> out += "<li>${guest.name}</li> <hr> " }
 
-		out += "</ul>"
+		out += "</ol>"
+
+		return response.html(httpServletResponse, out)
+	}
+
+	@Transactional(readOnly = true)
+	override fun getAlphaList(httpServletResponse: HttpServletResponse): String {
+		var data = this.invitationRepository.findAllOrderByFamilies()
+		var out = "<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/" +
+				"bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9Jv" +
+				"oRxT2MZw1T\" crossorigin=\"anonymous\">" +
+				"<ol>"
+
+		data.forEach { data ->
+			out += "<li><b>${data.familyName.replace("*", "").replace("_m", "")}</b></li> <hr>"
+			out += "<ul>"
+
+			guestRepository.findAllByInvitationUuid(data.uuid).forEach { guest ->
+				out += "<li>${guest.name}</li>"
+			}
+
+			out += "</ul> <br><br>"
+		}
+
+		out += "</ol>"
 
 		return response.html(httpServletResponse, out)
 	}

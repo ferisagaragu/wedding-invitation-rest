@@ -13,10 +13,15 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
 
 import java.util.UUID
-import javax.servlet.http.HttpServletResponse
+import org.pechblenda.service.Request
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestPart
+import org.springframework.web.multipart.MultipartFile
 
 @CrossOrigin(methods = [
-	RequestMethod.GET
+	RequestMethod.GET,
+	RequestMethod.POST
 ])
 @RestController
 @RequestMapping(name = "Invitation", value = ["/rest/public/invitations"])
@@ -42,6 +47,17 @@ class InvitationPublicController(
 	): ResponseEntity<Any> {
 		return try {
 			invitationService.generateTicket(invitationUuid)
+		} catch (e: ResponseStatusException) {
+			httpExceptionResponse.error(e)
+		}
+	}
+
+	@PostMapping
+	fun generateTicketFromNames(
+		@RequestBody guests: ArrayList<String>
+	): ResponseEntity<Any> {
+		return try {
+			invitationService.generateTicketFromNames(guests)
 		} catch (e: ResponseStatusException) {
 			httpExceptionResponse.error(e)
 		}

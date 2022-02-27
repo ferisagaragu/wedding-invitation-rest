@@ -15,4 +15,10 @@ interface IInvitationRepository: JpaRepository<Invitation, UUID> {
 	)
 	fun findAllLikeGuestOf(guestOf: String): List<Invitation>
 
+	@Query(
+		"select invitation from Invitation invitation " +
+		"order by invitation.familyName"
+	)
+	fun findAllOrderByFamilies(): List<Invitation>
+
 }

@@ -1,6 +1,5 @@
 package org.pechblenda.weddinginvitationrest.controller
 
-import javax.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,6 +15,8 @@ import org.pechblenda.service.Request
 import org.pechblenda.exception.HttpExceptionResponse
 import org.pechblenda.weddinginvitationrest.service.`interface`.IGuestService
 
+import javax.servlet.http.HttpServletResponse
+
 @CrossOrigin(methods = [
 	RequestMethod.GET,
 	RequestMethod.PATCH
@@ -30,6 +31,11 @@ class GuestPublicController(
 	@RequestMapping("/not-response")
 	fun notResponse(httpServletResponse: HttpServletResponse): String {
 		return guestService.getNotResponse(httpServletResponse)
+	}
+
+	@RequestMapping("/alpha-list")
+	fun getAlphaList(httpServletResponse: HttpServletResponse): String {
+		return guestService.getAlphaList(httpServletResponse)
 	}
 
 	@GetMapping("/validate-ticket/{guestTime}")

@@ -4,6 +4,7 @@ import org.pechblenda.auth.AuthController
 import org.pechblenda.doc.Documentation
 import org.pechblenda.doc.entity.ApiInfo
 import org.pechblenda.doc.entity.Credential
+import org.pechblenda.weddinginvitationrest.controller.GuestPublicController
 import org.pechblenda.weddinginvitationrest.controller.InvitationController
 
 import org.springframework.context.annotation.Bean
@@ -36,6 +37,7 @@ class BeanConfig {
 				)
 			),
 			AuthController::class,
+			GuestPublicController::class,
 			InvitationController::class
 		)
 	}

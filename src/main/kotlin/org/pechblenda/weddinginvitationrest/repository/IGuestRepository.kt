@@ -28,4 +28,10 @@ interface IGuestRepository: JpaRepository<Guest, UUID> {
 	)
 	fun findAllByStatusNotConfirm(): List<Guest>
 
+	@Query(
+		"select guest from Guest guest" +
+		" inner join guest.invitation invitation where invitation.uuid = :invitationUuid"
+	)
+	fun findAllByInvitationUuid(invitationUuid: UUID): List<Guest>
+
 }
