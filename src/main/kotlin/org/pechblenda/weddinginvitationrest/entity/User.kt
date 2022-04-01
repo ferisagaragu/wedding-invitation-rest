@@ -11,6 +11,7 @@ import org.pechblenda.auth.entity.IUser
 import org.pechblenda.auth.enums.AccountType
 
 import java.util.UUID
+import javax.persistence.ManyToMany
 
 @Entity
 @Table(name = "users")
@@ -36,7 +37,10 @@ class User(
 	override var enabled: Boolean,
 
 	@Column(columnDefinition = "boolean default false")
-	override var active: Boolean
+	override var active: Boolean,
+
+	@ManyToMany
+	var events: MutableList<Event>?
 ): IUser {
 
 	constructor(): this(
@@ -51,7 +55,8 @@ class User(
 		userName = "",
 		email = "",
 		enabled = false,
-		active = false
+		active = false,
+		events = null
 	)
 
 }

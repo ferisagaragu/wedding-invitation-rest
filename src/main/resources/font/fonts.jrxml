@@ -8,4 +8,13 @@
         <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
         <exportFonts/>
     </fontFamily>
+
+    <fontFamily name="Alice">
+        <normal><![CDATA[font/alice/Alice-Regular.ttf]]></normal>
+        <bold><![CDATA[font/alice/Alice-Regular.ttf]]></bold>
+        <italic><![CDATA[font/alice/Alice-Regular.ttf]]></italic>
+        <bolditalic><![CDATA[font/alice/Alice-Regular.ttf]]></bolditalic>
+        <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+        <exportFonts/>
+    </fontFamily>
 </fontFamilies>

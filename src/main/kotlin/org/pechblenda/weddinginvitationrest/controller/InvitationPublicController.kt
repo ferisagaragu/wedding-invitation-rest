@@ -60,4 +60,15 @@ class InvitationPublicController(
 		}
 	}
 
+	@PostMapping("/lizbeth-francisco")
+	fun generateTicketFromNamesLizbeth(
+		@RequestBody guests: ArrayList<String>
+	): ResponseEntity<Any> {
+		return try {
+			invitationService.generateTicketFromNamesLizbeth(guests)
+		} catch (e: ResponseStatusException) {
+			httpExceptionResponse.error(e)
+		}
+	}
+
 }
