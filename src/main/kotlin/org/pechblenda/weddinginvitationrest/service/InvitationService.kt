@@ -88,8 +88,6 @@ class InvitationService(
 		val parameters = mutableMapOf<String, Any>()
 		val fields = mutableListOf<MutableMap<String, Any>>()
 
-		println(guests)
-
 		guests?.forEach { guest ->
 			val guestData = mutableMapOf<String, Any>()
 			guestData["name"] = guest
@@ -106,6 +104,35 @@ class InvitationService(
 			report.exportPdf(
 				ClassPathResource(
 					"template/report/ticket-isnela-berrocal.jrxml"
+				).inputStream,
+				parameters,
+				fields.toMutableList()
+			)
+		)
+	}
+
+	override fun generateTicketFromNamesLizbeth(
+		guests: ArrayList<String>
+	): ResponseEntity<Any> {
+		val parameters = mutableMapOf<String, Any>()
+		val fields = mutableListOf<MutableMap<String, Any>>()
+
+		guests?.forEach { guest ->
+			val guestData = mutableMapOf<String, Any>()
+			guestData["name"] = guest.uppercase()
+			fields.add(guestData)
+		}
+
+		parameters["background"] = ClassPathResource(
+			"template/report/background-lizbeth-francisco.png"
+		).inputStream
+
+		return response.file(
+			"application/pdf",
+			"boletos.pdf",
+			report.exportPdf(
+				ClassPathResource(
+					"template/report/lizbeth-francisco.jrxml"
 				).inputStream,
 				parameters,
 				fields.toMutableList()

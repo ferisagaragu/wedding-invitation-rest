@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tiket" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5e945d8c-3f04-4724-9ca3-13d82ba24fad">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NO_DATA_ADAPTER"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="empty rows"/>
 	<parameter name="background" class="java.io.InputStream"/>
 	<field name="name" class="java.lang.String">
 		<property name="net.sf.jasperreports.json.field.expression" value="name"/>
 		<fieldDescription><![CDATA[name]]></fieldDescription>
-	</field>
-	<field name="authUrl" class="java.lang.String">
-		<property name="net.sf.jasperreports.json.field.expression" value="authUrl"/>
-		<fieldDescription><![CDATA[authUrl]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -20,11 +16,13 @@
 				<reportElement x="98" y="0" width="360" height="195" uuid="0c69c389-4b98-4a87-9c0a-8554725fd2c4">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<box topPadding="0" leftPadding="0" rightPadding="0"/>
-				<imageExpression><![CDATA[$P{background}]]></imageExpression>
+				<box topPadding="0" leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0" lineColor="#EABE3F"/>
+				</box>
+				<imageExpression><![CDATA["background-lizbeth-francisco.png"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="180" y="72" width="233" height="15" uuid="5dfc52e2-c1d0-46c0-a69e-e764059bbeaa">
+				<reportElement x="98" y="144" width="342" height="15" uuid="5dfc52e2-c1d0-46c0-a69e-e764059bbeaa">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
