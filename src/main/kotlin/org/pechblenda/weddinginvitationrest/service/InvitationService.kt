@@ -140,5 +140,31 @@ class InvitationService(
 		)
 	}
 
+	override fun generateTicketFromNamesAmerica(guests: ArrayList<String>): ResponseEntity<Any> {
+		val parameters = mutableMapOf<String, Any>()
+		val fields = mutableListOf<MutableMap<String, Any>>()
+
+		guests?.forEach { guest ->
+			val guestData = mutableMapOf<String, Any>()
+			guestData["name"] = guest.uppercase()
+			fields.add(guestData)
+		}
+
+		parameters["background"] = ClassPathResource(
+			"template/report/background-jessica-americal.png"
+		).inputStream
+
+		return response.file(
+			"application/pdf",
+			"boletos.pdf",
+			report.exportPdf(
+				ClassPathResource(
+					"template/report/jessica-america.jrxml"
+				).inputStream,
+				parameters,
+				fields.toMutableList()
+			)
+		)
+	}
 
 }

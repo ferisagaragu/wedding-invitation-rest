@@ -9,4 +9,5 @@ interface IInvitationService {
 	fun generateTicket(invitationUuid: UUID): ResponseEntity<Any>
 	fun generateTicketFromNames(guests: ArrayList<String>): ResponseEntity<Any>
 	fun generateTicketFromNamesLizbeth(guests: ArrayList<String>): ResponseEntity<Any>
+	fun generateTicketFromNamesAmerica(guests: ArrayList<String>): ResponseEntity<Any>
 }
